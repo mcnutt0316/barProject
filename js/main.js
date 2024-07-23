@@ -33,19 +33,29 @@ function randomDrink(){
       document.querySelector('img').src = data.drinks[0].strDrinkThumb
       document.querySelector('.glass').innerText = data.drinks[0].strGlass
       document.querySelector('.instructions').innerText = data.drinks[0].strInstructions
-      //i think i will need to learn async and promises to do what i am trying below..
-      // for (let i = 1; i <= 15; i++){
-      //   const measure = `data.drinks[0].strMeasure${i}`
-      //   console.log(measure)
-      // }
-      for(let i = 1; i <= 15; i++){
-        console.log(`You need ${data.drinks[0].strMeasure[i]} of ${data.drinks[0].strIngredient[i]}`)
+      for (let i = 1; i <= 15; i++){
+        const measure = data.drinks[0][`strMeasure${i}`]
+        console.log(measure)
       }
+      for (let i =1; i <= 15; i ++){
+        const listOfIngredientsMeasures =
+          `You need ${data.drinks[0][`strMeasure${i}`]} of ${data.drinks[0][`strIngredient${[i]}`]
+          }`
+          const li = document.createElement('li')
+          li.textContent = listOfIngredientsMeasures
+          document.querySelector('ul').appendChild('li')
+      }
+      // I am getting this as an error on the console: error TypeError: Argument 1 ('node') to Node.appendChild must be an instance of Node
+
     })
     .catch(err => {
       console.log(`error ${err}`)
   });
 }
+
+// const li = document.createElement('li')
+      // li.textContent = `You need ${data.drinks[0][`strMeasure${i}`]} of ${data.drinks[0][`strIngredient${[i]}`]
+      // document.querySelector('ul').appendChild('li')
 
 
 
