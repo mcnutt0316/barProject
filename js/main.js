@@ -24,6 +24,8 @@ document.querySelector('#random').addEventListener('click',randomDrink)
 
 
 function randomDrink(){
+  let drinkList = document.getElementById('ingredients-items')
+  drinkList.innerHTML = ''
 
   fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
     .then( res => res.json())
@@ -43,9 +45,9 @@ function randomDrink(){
           }`
           const li = document.createElement('li')
           li.textContent = listOfIngredientsMeasures
-          document.querySelector('ul').appendChild('li')
+          document.querySelector('ul').appendChild(li)
       }
-      // I am getting this as an error on the console: error TypeError: Argument 1 ('node') to Node.appendChild must be an instance of Node
+      
 
     })
     .catch(err => {
@@ -53,9 +55,7 @@ function randomDrink(){
   });
 }
 
-// const li = document.createElement('li')
-      // li.textContent = `You need ${data.drinks[0][`strMeasure${i}`]} of ${data.drinks[0][`strIngredient${[i]}`]
-      // document.querySelector('ul').appendChild('li')
+
 
 
 
