@@ -5,6 +5,8 @@ document.querySelector('button').addEventListener('click',getDrink)
 function getDrink(){
     let drink = document.querySelector('input').value
     let noSpace = drink.replace(/\\s+/g, '')
+    let drinkList = document.getElementById('ingredients-items')
+  drinkList.innerHTML = ''
 
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${noSpace}`)
     .then(res => res.json()) // parse response as JSON
@@ -13,6 +15,25 @@ function getDrink(){
       document.querySelector('.name').innerText = data.drinks[0].strDrink
       document.querySelector('img').src = data.drinks[0].strDrinkThumb
       document.querySelector('.instructions').innerText = data.drinks[0].strInstructions
+      for (let i = 1; i <= 15; i++){
+        const measure = data.drinks[0][`strMeasure${i}`]
+        if(measure !== null){
+        console.log(measure)
+        }
+      }
+      for (let i =1; i <= 15; i ++){
+        const measure = data.drinks[0][`strMeasure${i}`]
+        const ingredients = data.drinks[0][`strIngredient${i}`]
+        const listOfIngredientsMeasures =
+          `You need ${measure} of ${ingredients
+          }`
+          if(measure && ingredients !== null){
+
+          const li = document.createElement('li')
+          li.textContent = listOfIngredientsMeasures
+          document.querySelector('ul').appendChild(li)
+          }
+      }
     })
     .catch(err => {
         console.log(`error ${err}`)
@@ -37,18 +58,23 @@ function randomDrink(){
       document.querySelector('.instructions').innerText = data.drinks[0].strInstructions
       for (let i = 1; i <= 15; i++){
         const measure = data.drinks[0][`strMeasure${i}`]
+        if(measure !== null){
         console.log(measure)
+        }
       }
       for (let i =1; i <= 15; i ++){
+        const measure = data.drinks[0][`strMeasure${i}`]
+        const ingredients = data.drinks[0][`strIngredient${i}`]
         const listOfIngredientsMeasures =
-          `You need ${data.drinks[0][`strMeasure${i}`]} of ${data.drinks[0][`strIngredient${[i]}`]
+          `You need ${measure} of ${ingredients
           }`
+          if(measure && ingredients !== null){
+
           const li = document.createElement('li')
           li.textContent = listOfIngredientsMeasures
           document.querySelector('ul').appendChild(li)
+          }
       }
-      
-
     })
     .catch(err => {
       console.log(`error ${err}`)
